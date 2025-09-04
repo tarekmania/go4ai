@@ -12,7 +12,7 @@ const Index = () => {
             Scheduler Link Finder
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Find Calendly and scheduler links for investors, VCs, and family offices across LinkedIn, Twitter, and company websites
+            Find Calendly and scheduler links for professionals across LinkedIn, Twitter, and the web
           </p>
         </div>
         <SchedulerLinkFinder />
