@@ -273,7 +273,7 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
           ) : (
             <>
               <Search className="w-4 h-4 mr-2" />
-              Find Scheduler Links
+              Generate Search Queries
             </>
           )}
         </Button>
