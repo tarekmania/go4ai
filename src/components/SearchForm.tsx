@@ -187,49 +187,6 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4">
-          {/* Time Range */}
-          <div className="space-y-3">
-            <Label className="text-sm font-semibold">Time Range</Label>
-            <Select value={formData.timeRange} onValueChange={(value: any) => setFormData(prev => ({ ...prev, timeRange: value }))}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-background border border-border z-50">
-                <SelectItem value="any">Any time</SelectItem>
-                <SelectItem value="past-year">Past year</SelectItem>
-                <SelectItem value="past-month">Past month</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Similarity Match */}
-          <div className="space-y-3">
-            <Label className="text-sm font-semibold">Name Matching</Label>
-            <Select value={formData.similarityMatch} onValueChange={(value: any) => setFormData(prev => ({ ...prev, similarityMatch: value }))}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-background border border-border z-50">
-                <SelectItem value="strict">Strict</SelectItem>
-                <SelectItem value="fuzzy">Fuzzy (recommended)</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Max Results */}
-          <div className="space-y-3">
-            <Label htmlFor="maxResults" className="text-sm font-semibold">Max Results</Label>
-            <Input
-              id="maxResults"
-              type="number"
-              value={formData.maxResults}
-              onChange={(e) => setFormData(prev => ({ ...prev, maxResults: parseInt(e.target.value) || 20 }))}
-              min="1"
-              max="100"
-            />
-          </div>
-        </div>
 
         {/* Exclude Terms */}
         <div className="space-y-3">
