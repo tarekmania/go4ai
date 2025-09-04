@@ -11,9 +11,11 @@ export interface SearchQuery {
 export const buildGoogleSearchQueries = (params: SearchParams): SearchQuery[] => {
   const queries: SearchQuery[] = [];
   
-  // Helper function to build search terms
+  // Helper function to build search terms with OR logic
   const buildSearchTerms = (terms: string[]): string => {
-    return terms.map(term => `"${term}"`).join(' ');
+    if (terms.length === 0) return '';
+    if (terms.length === 1) return `"${terms[0]}"`;
+    return `(${terms.map(term => `"${term}"`).join(' OR ')})`;
   };
 
   // Build scheduler terms from selected platforms
