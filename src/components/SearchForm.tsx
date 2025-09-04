@@ -21,8 +21,8 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
   const [currentOrg, setCurrentOrg] = useState('');
   const [currentExclude, setCurrentExclude] = useState('');
 
-  const platforms = ['LinkedIn', 'Twitter', 'Company Sites', 'Medium/Substack', 'Crunchbase', 'PDFs'];
-  const schedulerPlatforms = ['calendly.com', 'cal.com', 'acuity.com', 'youcanbook.me', 'picktime.com', 'simplybook.me'];
+  const platforms = ['LinkedIn', 'Twitter'];
+  const schedulerPlatforms = ['calendly.com'];
 
   const addTarget = () => {
     if (currentTarget.trim()) {
@@ -289,7 +289,7 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
 
         <Button 
           type="submit" 
-          disabled={isLoading || formData.platforms.length === 0 || formData.schedulerPlatforms.length === 0}
+          disabled={isLoading || formData.targets.length === 0}
           className="w-full gradient-primary hover:shadow-glow transition-smooth"
         >
           {isLoading ? (

@@ -57,16 +57,12 @@ export const buildGoogleSearchQueries = (params: SearchParams): SearchQuery[] =>
     switch (platform) {
       case 'LinkedIn':
         siteFilter = 'site:linkedin.com/in';
-        platformSpecific = targetTerms && orgTerms 
-          ? `${siteFilter} ${schedulerTerms} ${targetTerms} ${orgTerms} ${locationTerm} ${excludeTerms}`.trim()
-          : `${siteFilter} ${schedulerTerms} ${targetTerms || orgTerms} ${locationTerm} ${excludeTerms}`.trim();
+        platformSpecific = `${siteFilter} ${schedulerTerms} ${targetTerms} ${orgTerms} ${locationTerm} ${excludeTerms}`.trim();
         break;
         
       case 'Twitter':
         siteFilter = 'site:twitter.com';
-        platformSpecific = targetTerms && orgTerms 
-          ? `${siteFilter} ${schedulerTerms} ${targetTerms} ${orgTerms} ${locationTerm} ${excludeTerms}`.trim()
-          : `${siteFilter} ${schedulerTerms} ${targetTerms || orgTerms} ${locationTerm} ${excludeTerms}`.trim();
+        platformSpecific = `${siteFilter} ${schedulerTerms} ${targetTerms} ${orgTerms} ${locationTerm} ${excludeTerms}`.trim();
         break;
         
       case 'Company Sites':

@@ -9,10 +9,10 @@ export const SchedulerLinkFinder = () => {
     targets: [],
     organizations: [],
     location: '',
-    platforms: ['LinkedIn', 'Twitter', 'Company Sites'],
+    platforms: ['LinkedIn', 'Twitter'],
     timeRange: 'any',
-    schedulerPlatforms: ['calendly.com', 'cal.com'],
-    includeGenericBookingTerms: true,
+    schedulerPlatforms: ['calendly.com'],
+    includeGenericBookingTerms: false,
     excludeTerms: [],
     similarityMatch: 'fuzzy',
     maxResults: 20
