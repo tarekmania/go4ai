@@ -22,6 +22,7 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
   const [currentExclude, setCurrentExclude] = useState('');
 
   const platforms = ['LinkedIn', 'Twitter', 'Company Sites', 'Medium/Substack', 'Crunchbase', 'PDFs'];
+  const schedulerPlatforms = ['calendly.com', 'cal.com', 'acuity.com', 'youcanbook.me', 'picktime.com', 'simplybook.me'];
 
   const addTarget = () => {
     if (currentTarget.trim()) {
@@ -80,6 +81,15 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
       platforms: prev.platforms.includes(platform)
         ? prev.platforms.filter(p => p !== platform)
         : [...prev.platforms, platform]
+    }));
+  };
+
+  const toggleSchedulerPlatform = (platform: string) => {
+    setFormData(prev => ({
+      ...prev,
+      schedulerPlatforms: prev.schedulerPlatforms.includes(platform)
+        ? prev.schedulerPlatforms.filter(p => p !== platform)
+        : [...prev.schedulerPlatforms, platform]
     }));
   };
 
@@ -248,21 +258,38 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
           </div>
         </div>
 
+        {/* Scheduler Platforms */}
+        <div className="space-y-3">
+          <Label className="text-sm font-semibold">Scheduler Platforms to Include</Label>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {schedulerPlatforms.map(platform => (
+              <div key={platform} className="flex items-center space-x-2">
+                <Checkbox
+                  id={`scheduler-${platform}`}
+                  checked={formData.schedulerPlatforms.includes(platform)}
+                  onCheckedChange={() => toggleSchedulerPlatform(platform)}
+                />
+                <Label htmlFor={`scheduler-${platform}`} className="text-sm">{platform}</Label>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Options */}
         <div className="flex items-center space-x-2">
           <Checkbox
-            id="includeVariants"
-            checked={formData.includeVariants}
-            onCheckedChange={(checked) => setFormData(prev => ({ ...prev, includeVariants: !!checked }))}
+            id="includeGenericBookingTerms"
+            checked={formData.includeGenericBookingTerms}
+            onCheckedChange={(checked) => setFormData(prev => ({ ...prev, includeGenericBookingTerms: !!checked }))}
           />
-          <Label htmlFor="includeVariants" className="text-sm">
-            Include variants (personal sites, Linktree, Carrd, Bento)
+          <Label htmlFor="includeGenericBookingTerms" className="text-sm">
+            Include generic booking terms (schedule a call, book time, etc.)
           </Label>
         </div>
 
         <Button 
           type="submit" 
-          disabled={isLoading || formData.platforms.length === 0}
+          disabled={isLoading || formData.platforms.length === 0 || formData.schedulerPlatforms.length === 0}
           className="w-full gradient-primary hover:shadow-glow transition-smooth"
         >
           {isLoading ? (

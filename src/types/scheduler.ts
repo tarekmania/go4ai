@@ -4,7 +4,8 @@ export interface SearchParams {
   location: string;
   platforms: string[];
   timeRange: 'any' | 'past-year' | 'past-month';
-  includeVariants: boolean;
+  schedulerPlatforms: string[];
+  includeGenericBookingTerms: boolean;
   excludeTerms: string[];
   similarityMatch: 'strict' | 'fuzzy';
   maxResults: number;

@@ -16,10 +16,17 @@ export const buildGoogleSearchQueries = (params: SearchParams): SearchQuery[] =>
     return terms.map(term => `"${term}"`).join(' ');
   };
 
-  // Build base scheduler terms
-  const schedulerTerms = params.includeVariants 
-    ? '("calendly" OR "cal.com" OR "acuity" OR "book a call" OR "schedule a meeting" OR "book time" OR "book a meeting")'
-    : '("calendly" OR "cal.com")';
+  // Build scheduler terms from selected platforms
+  let schedulerTerms = '';
+  if (params.schedulerPlatforms.length > 0) {
+    const platformTerms = params.schedulerPlatforms.map(platform => `"${platform}"`).join(' OR ');
+    schedulerTerms = `(${platformTerms})`;
+    
+    // Add generic booking terms if enabled
+    if (params.includeGenericBookingTerms) {
+      schedulerTerms = `(${platformTerms} OR "book a call" OR "schedule a meeting" OR "book time" OR "book a meeting")`;
+    }
+  }
 
   // Build target terms
   const targetTerms = params.targets.length > 0 ? buildSearchTerms(params.targets) : '';
