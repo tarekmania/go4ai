@@ -21,11 +21,6 @@ export const buildGoogleSearchQueries = (params: SearchParams): SearchQuery[] =>
   if (params.schedulerPlatforms.length > 0) {
     const platformTerms = params.schedulerPlatforms.map(platform => `"${platform}"`).join(' OR ');
     schedulerTerms = `(${platformTerms})`;
-    
-    // Add generic booking terms if enabled
-    if (params.includeGenericBookingTerms) {
-      schedulerTerms = `(${platformTerms} OR "book a call" OR "schedule a meeting" OR "book time" OR "book a meeting")`;
-    }
   }
 
   // Build target terms

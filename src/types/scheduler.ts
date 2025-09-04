@@ -5,7 +5,6 @@ export interface SearchParams {
   platforms: string[];
   timeRange: 'any' | 'past-year' | 'past-month';
   schedulerPlatforms: string[];
-  includeGenericBookingTerms: boolean;
   excludeTerms: string[];
   similarityMatch: 'strict' | 'fuzzy';
   maxResults: number;

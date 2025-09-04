@@ -112,7 +112,7 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
                 id="targets"
                 value={currentTarget}
                 onChange={(e) => setCurrentTarget(e.target.value)}
-                placeholder="e.g., seed investor, family office principal"
+                placeholder="e.g., CEO, marketing director, sales manager"
                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTarget())}
               />
               <Button type="button" onClick={addTarget} size="sm" variant="outline">
@@ -139,7 +139,7 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
                 id="organizations"
                 value={currentOrg}
                 onChange={(e) => setCurrentOrg(e.target.value)}
-                placeholder="e.g., Sequoia Capital, Goldman Sachs"
+                placeholder="e.g., Microsoft, Tesla, McKinsey"
                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addOrganization())}
               />
               <Button type="button" onClick={addOrganization} size="sm" variant="outline">
@@ -166,7 +166,7 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
             id="location"
             value={formData.location}
             onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-            placeholder="e.g., San Francisco, Zürich, MENA"
+            placeholder="e.g., San Francisco, London, Tokyo"
           />
         </div>
 
@@ -195,7 +195,7 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-background border border-border z-50">
                 <SelectItem value="any">Any time</SelectItem>
                 <SelectItem value="past-year">Past year</SelectItem>
                 <SelectItem value="past-month">Past month</SelectItem>
@@ -210,7 +210,7 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-background border border-border z-50">
                 <SelectItem value="strict">Strict</SelectItem>
                 <SelectItem value="fuzzy">Fuzzy (recommended)</SelectItem>
               </SelectContent>
@@ -275,17 +275,6 @@ export const SearchForm = ({ onSearch, isLoading, initialParams }: SearchFormPro
           </div>
         </div>
 
-        {/* Options */}
-        <div className="flex items-center space-x-2">
-          <Checkbox
-            id="includeGenericBookingTerms"
-            checked={formData.includeGenericBookingTerms}
-            onCheckedChange={(checked) => setFormData(prev => ({ ...prev, includeGenericBookingTerms: !!checked }))}
-          />
-          <Label htmlFor="includeGenericBookingTerms" className="text-sm">
-            Include generic booking terms (schedule a call, book time, etc.)
-          </Label>
-        </div>
 
         <Button 
           type="submit" 

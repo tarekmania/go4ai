@@ -12,7 +12,6 @@ export const SchedulerLinkFinder = () => {
     platforms: ['LinkedIn', 'Twitter'],
     timeRange: 'any',
     schedulerPlatforms: ['calendly.com'],
-    includeGenericBookingTerms: false,
     excludeTerms: [],
     similarityMatch: 'fuzzy',
     maxResults: 20
