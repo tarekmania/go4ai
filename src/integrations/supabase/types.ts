@@ -14,7 +14,203 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contacts: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          linkedin_url: string | null
+          location: string | null
+          notes: string | null
+          organization: string | null
+          person_name: string
+          source: Database["public"]["Enums"]["contact_source"]
+          status: Database["public"]["Enums"]["contact_status"]
+          tags: string[] | null
+          title: string | null
+          twitter_url: string | null
+          updated_at: string
+          user_id: string
+          website_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          linkedin_url?: string | null
+          location?: string | null
+          notes?: string | null
+          organization?: string | null
+          person_name: string
+          source?: Database["public"]["Enums"]["contact_source"]
+          status?: Database["public"]["Enums"]["contact_status"]
+          tags?: string[] | null
+          title?: string | null
+          twitter_url?: string | null
+          updated_at?: string
+          user_id: string
+          website_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          linkedin_url?: string | null
+          location?: string | null
+          notes?: string | null
+          organization?: string | null
+          person_name?: string
+          source?: Database["public"]["Enums"]["contact_source"]
+          status?: Database["public"]["Enums"]["contact_status"]
+          tags?: string[] | null
+          title?: string | null
+          twitter_url?: string | null
+          updated_at?: string
+          user_id?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
+      extension_sync: {
+        Row: {
+          created_at: string
+          data: Json
+          id: string
+          processed: boolean | null
+          sync_type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          data: Json
+          id?: string
+          processed?: boolean | null
+          sync_type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          id?: string
+          processed?: boolean | null
+          sync_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      scheduler_links: {
+        Row: {
+          confidence_score: number | null
+          contact_id: string
+          context_snippet: string | null
+          discovered_at: string
+          id: string
+          is_active: boolean | null
+          is_verified: boolean | null
+          last_checked: string | null
+          platform: Database["public"]["Enums"]["scheduler_platform"]
+          url: string
+          verification_date: string | null
+        }
+        Insert: {
+          confidence_score?: number | null
+          contact_id: string
+          context_snippet?: string | null
+          discovered_at?: string
+          id?: string
+          is_active?: boolean | null
+          is_verified?: boolean | null
+          last_checked?: string | null
+          platform: Database["public"]["Enums"]["scheduler_platform"]
+          url: string
+          verification_date?: string | null
+        }
+        Update: {
+          confidence_score?: number | null
+          contact_id?: string
+          context_snippet?: string | null
+          discovered_at?: string
+          id?: string
+          is_active?: boolean | null
+          is_verified?: boolean | null
+          last_checked?: string | null
+          platform?: Database["public"]["Enums"]["scheduler_platform"]
+          url?: string
+          verification_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scheduler_links_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      search_sessions: {
+        Row: {
+          completed_at: string | null
+          id: string
+          results_count: number | null
+          search_params: Json
+          started_at: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          id?: string
+          results_count?: number | null
+          search_params: Json
+          started_at?: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          id?: string
+          results_count?: number | null
+          search_params?: Json
+          started_at?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_profiles: {
+        Row: {
+          api_keys: Json | null
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          preferences: Json | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          api_keys?: Json | null
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          preferences?: Json | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          api_keys?: Json | null
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          preferences?: Json | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +219,20 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      contact_source: "extension" | "web_app" | "manual" | "import"
+      contact_status:
+        | "new"
+        | "contacted"
+        | "responded"
+        | "meeting_scheduled"
+        | "closed"
+      scheduler_platform:
+        | "calendly"
+        | "cal.com"
+        | "acuity"
+        | "hubspot"
+        | "zoom"
+        | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +359,23 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      contact_source: ["extension", "web_app", "manual", "import"],
+      contact_status: [
+        "new",
+        "contacted",
+        "responded",
+        "meeting_scheduled",
+        "closed",
+      ],
+      scheduler_platform: [
+        "calendly",
+        "cal.com",
+        "acuity",
+        "hubspot",
+        "zoom",
+        "other",
+      ],
+    },
   },
 } as const
